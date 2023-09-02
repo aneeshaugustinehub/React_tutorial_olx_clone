@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import Logo from "../../olx-logo.png";
-import { FirebaseContext } from "../../store/firebaseContext";
+import { FirebaseContext } from "../../store/Context";
 import { useHistory } from "react-router-dom";
 import "./Signup.css";
 
@@ -33,10 +33,14 @@ export default function Signup() {
 
         });
       }).catch((error) => {
-        console.log("login faild");
+        console.log("login failed");
         alert(error.message);
       });
   };
+  const handleLogin = (e) => {
+    e.preventDefault();
+    history.push("/login");
+  }
   return (
     <div>
       <div className="signupParentDiv">
@@ -93,7 +97,7 @@ export default function Signup() {
           <br />
           <button>Signup</button>
         </form>
-        <a>Login</a>
+        <a onClick={handleLogin}>Login</a>
       </div>
     </div>
   );
