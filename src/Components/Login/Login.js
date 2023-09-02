@@ -1,20 +1,27 @@
-import React, {useState ,useContext} from 'react';
-import { FirebaseContext } from '../../store/firebaseContext';
-import Logo from '../../olx-logo.png';
-import './Login.css';
+import React, { useState, useContext } from "react";
+import { FirebaseContext } from "../../store/firebaseContext";
+import Logo from "../../olx-logo.png";
+import "./Login.css";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 function Login() {
-  const  [email, setEmail] = useState(' ');
-  const  [password, setPassword] = useState(' ');
-  const {firebase}= useContext(firebase)
-  const handilLogin = ()=>{
-e.preventDefault()
-firebase.auth().signInWithEmainAndPassword(email,password).then(()=>{
-  alert('logged in')
-}).catch((error)=>{
-  alert(error.message)
-})
-  }
+  const [email, setEmail] = useState(" ");
+  const [password, setPassword] = useState(" ");
+  const { firebase } = useContext(firebase);
+  const history = useHistory();
+  const handilLogin = () => {
+    e.preventDefault();
+    firebase
+      .auth()
+      .signInWithEmainAndPassword(email, password)
+      .then(() => {
+        history.push("/");
+        alert("logged in");
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
+  };
   return (
     <div>
       <div className="loginParentDiv">
@@ -26,7 +33,7 @@ firebase.auth().signInWithEmainAndPassword(email,password).then(()=>{
             className="input"
             type="email"
             value={email}
-            onChange={(e)=> setEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
             id="fname"
             name="email"
             defaultValue="John"
@@ -38,7 +45,7 @@ firebase.auth().signInWithEmainAndPassword(email,password).then(()=>{
             className="input"
             type="password"
             value={password}
-            onChange={(e)=> setPassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
             id="lname"
             name="password"
             defaultValue="Doe"
