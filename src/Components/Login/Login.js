@@ -7,13 +7,13 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 function Login() {
   const [email, setEmail] = useState(" ");
   const [password, setPassword] = useState(" ");
-  const { firebase } = useContext(firebase);
+  const { firebase } = useContext(FirebaseContext);
   const history = useHistory();
-  const handilLogin = () => {
+  const handilLogin = (e) => {
     e.preventDefault();
     firebase
       .auth()
-      .signInWithEmainAndPassword(email, password)
+      .signInWithEmailAndPassword(email, password)
       .then(() => {
         history.push("/");
         alert("logged in");
