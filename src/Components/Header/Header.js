@@ -53,8 +53,10 @@ function Header() {
         <div className="sellMenu">
           <SellButton></SellButton>
           <div className="sellMenuContent">
-            <SellButtonPlus></SellButtonPlus>
-            <span>SELL</span>
+            <SellButtonPlus ></SellButtonPlus>
+            <span onClick={()=>{
+            history.push('/create')
+          }}>SELL</span>
           </div>
         </div>
       </div>
