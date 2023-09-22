@@ -1,15 +1,16 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 import Heart from "../../assets/Heart";
 import { FirebaseContext } from "../../store/Context";
 import "./Post.css";
+import { PostContext } from "../../store/PostContext";
 
 function Posts() {
   const { firebase } = useContext(FirebaseContext);
-  const [products, setProducts] = useState([]);
-  const history = useHistory()
-
+  const [product, setProducts] = useState([]);
+  const history = useHistory();
+  const { setPostDetails } = useContext(PostContext);
 
   useState(() => {
     firebase
@@ -23,7 +24,7 @@ function Posts() {
             id: product.id,
           };
         });
-        console.log(allPost);
+        //console.log(allPost);
         setProducts(allPost);
       });
   });
@@ -36,7 +37,13 @@ function Posts() {
           <span>View more</span>
         </div>
         <div className="cards">
-          <div className="card">
+          <div
+            className="card"
+            onClick={() => {
+              setPostDetails(product);
+              history.push("/view");
+            }}
+          >
             <div className="favorite">
               <Heart></Heart>
             </div>
@@ -59,11 +66,12 @@ function Posts() {
           <span>Fresh recommendations</span>
         </div>
         <div className="cards">
-          {products.map((product) => {
+          {product.map((product) => {
             return (
               <div
                 className="card"
                 onClick={() => {
+                  setPostDetails(product);
                   history.push("/view");
                 }}
               >
